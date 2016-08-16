@@ -42,6 +42,7 @@ public class DemoSchedule{
 
 
    @Schedule(name="",cron="")
+   
    public void schedule(){
 
    }
