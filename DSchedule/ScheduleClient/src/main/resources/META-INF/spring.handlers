@@ -1,0 +1,1 @@
+http\://www.springframework.org/schema/schedule=com.zjp.schedule.handler.ScheduleNamespaceHandler

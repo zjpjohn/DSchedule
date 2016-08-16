@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DSchedule.iml" filepath="$PROJECT_DIR$/DSchedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScheduleCenter/ScheduleCenter.iml" filepath="$PROJECT_DIR$/ScheduleCenter/ScheduleCenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScheduleClient/ScheduleClient.iml" filepath="$PROJECT_DIR$/ScheduleClient/ScheduleClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScheduleRpc/ScheduleRpc.iml" filepath="$PROJECT_DIR$/ScheduleRpc/ScheduleRpc.iml" />
+    </modules>
+  </component>
+</project>

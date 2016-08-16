@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ScheduleCenter:war">
+    <output-path>$PROJECT_DIR$/ScheduleCenter/target</output-path>
+    <root id="archive" name="scheduleCenter.war">
+      <element id="artifact" artifact-name="ScheduleCenter:war exploded" />
+    </root>
+  </artifact>
+</component>
