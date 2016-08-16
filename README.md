@@ -37,6 +37,7 @@ http://www.springframework.org/schema/schedule
 
 
 @Component("DemoSchedule")
+
 public class DemoSchedule{
 
 
