@@ -29,10 +29,15 @@ import java.util.Date;
  */
 
 public class Application {
+    //应用id
     private Integer id;
+    //应用名称
     private String appName;
+    //应用状态
     private int status;
+    //应用创建时间
     private Date createTime;
+    //应用更新时间
     private Date updateTime;
 
     public Integer getId() {

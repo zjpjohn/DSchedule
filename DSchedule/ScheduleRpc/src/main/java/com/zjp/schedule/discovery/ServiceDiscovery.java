@@ -85,7 +85,8 @@ public class ServiceDiscovery {
     }
 
     /**
-     * 加载数据
+     * 服务启动时加载所有注册的服务信息
+     * <p/>
      */
     private class DataLoaderHandle implements DataLoadHandle {
 
