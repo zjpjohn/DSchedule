@@ -9,6 +9,7 @@ import com.netflix.curator.framework.CuratorFrameworkFactory;
 import com.netflix.curator.framework.recipes.cache.PathChildrenCache;
 import com.netflix.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import com.netflix.curator.framework.recipes.cache.PathChildrenCacheListener;
+import com.netflix.curator.framework.recipes.locks.InterProcessMutex;
 import com.netflix.curator.framework.recipes.locks.InterProcessSemaphoreV2;
 import com.netflix.curator.retry.RetryNTimes;
 import com.zjp.schedule.entity.MachineInfo;
@@ -306,5 +307,15 @@ public class ZkClient {
      */
     public InterProcessSemaphoreV2 getLock(String path, int count) {
         return new InterProcessSemaphoreV2(curator, path, count);
+    }
+
+    /**
+     * 获取分布式可重入锁
+     *
+     * @param path 锁的路径
+     * @return
+     */
+    public InterProcessMutex getReentrantLock(String path) {
+        return new InterProcessMutex(curator, path);
     }
 }

@@ -1,11 +1,13 @@
 package com.zjp.schedule.distribute;
 
-import com.netflix.curator.framework.recipes.locks.InterProcessSemaphoreV2;
+import com.netflix.curator.framework.recipes.locks.InterProcessMutex;
 import com.zjp.schedule.core.Config;
 import com.zjp.schedule.core.ZkClient;
 import com.zjp.schedule.entity.Request;
 import org.pinae.rafiki.job.Job;
 import org.pinae.rafiki.job.JobException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -36,8 +38,8 @@ import java.util.UUID;
  */
 
 public abstract class DistributeJob implements Job {
-
-    private InterProcessSemaphoreV2 lock;
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    private InterProcessMutex lock;
     private ZkClient zkClient;
     private String zkUrl;
     private String appName;
@@ -63,8 +65,8 @@ public abstract class DistributeJob implements Job {
 
     public void init() {
         zkClient = ZkClient.init(getZkUrl(), Config.ZK_CLIENT_PATH);
-        lock = zkClient.getLock(Config.ZK_CLIENT_PATH + "/" + getAppName() +
-                ":" + getClassName() + ":" + getMethodName() + "/lock", 1);
+        lock = zkClient.getReentrantLock(Config.ZK_CLIENT_PATH + "/" + getAppName() +
+                ":" + getClassName() + ":" + getMethodName() + "/lock");
 
     }
 
@@ -107,13 +109,19 @@ public abstract class DistributeJob implements Job {
     public boolean execute() throws JobException {
         try {
             //获取锁，获得锁时执行业务操作
-            if (lock.acquire() != null) {
-                return call();
-            }
+            lock.acquire();
+            return call();
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             return false;
+        } finally {
+            //最终释放锁
+            try {
+                lock.release();
+            } catch (Exception e) {
+                log.error("release lock fail:{}", e);
+            }
         }
-        return false;
     }
 
     public abstract boolean call();
